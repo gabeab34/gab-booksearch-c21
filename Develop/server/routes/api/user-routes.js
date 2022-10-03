@@ -1,4 +1,4 @@
-const router = require('express').Router();
+import router from ('express').Router();
 const {
   createUser,
   getSingleUser,
