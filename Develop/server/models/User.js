@@ -1,8 +1,8 @@
-import { Schema, model } from 'mongoose';
-import {bcrypt} from 'bcrypt';
+const { Schema, model } = require('mongoose');
+const bcrypt = require('bcrypt');
 
-// import schema from Book.js
-import {bookSchema} from ('./Book');
+// const schema from Book.js
+const bookSchema = require('./Book.js');
 
 const userSchema = new Schema(
   {

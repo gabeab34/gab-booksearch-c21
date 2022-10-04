@@ -1,6 +1,6 @@
-import { User, Book } from "../models"
-import { AuthenticationError } from "apollo-server-express"
-import { signToken } from '../utils/auth.js'
+const { User }  = require("../models");
+const { AuthenticationError } = require("apollo-server-express");
+const { signToken }  = require('../utils/auth.js');
 
 const resolvers = {
     Query: {
@@ -14,9 +14,9 @@ const resolvers = {
     
     },
     Mutation: {
-        newUser: async (parent, args) => {
+        addUser: async (parent, args) => {
             const user = await User.create(args);
-            const token = signToken(userNew);
+            const token = signToken(user);
             return { token, user };
         },
         login: async (parent, { email, password }) => {
@@ -56,5 +56,5 @@ const resolvers = {
     }
 };
 
-module.exports = resolvers;
+module.exports = resolvers
 
