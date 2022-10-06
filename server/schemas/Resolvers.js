@@ -31,22 +31,22 @@ const resolvers = {
             const token = signToken(user);
             return { token, user};
         },
-        saveBook: async (parent, args, context) => {
+        saveBook: async (parent, {bookData}, context) => {
             if (context.user) {
                 const userUpdate = await User.findByIdAndUpdate(
                     { _id: context.user._id },
-                    { $push: { savedBooks: args.input } },
-                    { new: true}
+                    { $push: { savedBooks: bookData } },
+                    { new: true, runValidators: true}
                 );
                 return userUpdate;
             }
             throw new AuthenticationError("You must be logged in to save books")
         },
-        removeBook: async (parent, args, context) => {
+        removeBook: async (parent, {bookId}, context) => {
             if(context.user) {
             const userUpdate = await User.findOneAndUpdate(
                 { _id: context.user._id },
-                { $pull: { savedBooks: { bookId: args.bookId}}},
+                { $pull: { savedBooks: { bookId } } },
                 { new: true}
             );
             return userUpdate;

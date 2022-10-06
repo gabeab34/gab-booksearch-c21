@@ -20,7 +20,7 @@ type User {
 }
 
 input BookInput {
-    bookId: String
+    bookId: String!
     authors: [String]
     description: String
     image: String
